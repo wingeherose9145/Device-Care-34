@@ -8,6 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.GestureDetector
 import android.view.MotionEvent
+import android.view.View
 import android.view.WindowManager
 import android.widget.SeekBar
 import android.widget.Toast
@@ -89,12 +90,15 @@ class PlayerActivity : AppCompatActivity() {
 
         playCurrentVideo()
 
+        // 【优化点 1】进度条控制：点击屏幕，播放时隐藏进度条，暂停时显示进度条
         playerView.setOnClickListener {
 
             if (player.isPlaying) {
                 player.pause()
+                seekBar.visibility = View.VISIBLE
             } else {
                 player.play()
+                seekBar.visibility = View.GONE
             }
         }
     }
@@ -117,6 +121,9 @@ class PlayerActivity : AppCompatActivity() {
             player.prepare()
 
             player.play()
+
+            // 【优化点 1 补充】切换/开始播放新视频时，默认隐藏进度条
+            seekBar.visibility = View.GONE
 
         } catch (e: Exception) {
 
@@ -163,24 +170,19 @@ class PlayerActivity : AppCompatActivity() {
         }
     }
 
+    // 【优化点 2】滑动切换方式：引入文件一的“取模算法”，实现无限循环滚动切换（解决首尾卡死问题）
     private fun playNextVideo() {
 
-        if (currentIndex < videoUris.size - 1) {
-
-            currentIndex++
-
-            playCurrentVideo()
-        }
+        if (videoUris.isEmpty()) return
+        currentIndex = (currentIndex + 1) % videoUris.size
+        playCurrentVideo()
     }
 
     private fun playPreviousVideo() {
 
-        if (currentIndex > 0) {
-
-            currentIndex--
-
-            playCurrentVideo()
-        }
+        if (videoUris.isEmpty()) return
+        currentIndex = if (currentIndex > 0) currentIndex - 1 else videoUris.size - 1
+        playCurrentVideo()
     }
 
     private fun setupGestureDetector() {
@@ -227,7 +229,9 @@ class PlayerActivity : AppCompatActivity() {
 
             override fun run() {
 
-                if (player.duration > 0) {
+                // 【优化点 3】顺滑的横竖切换过渡：加入 && seekBar.visibility == View.VISIBLE 判断
+                // 仅在进度条可见时才去刷新 UI。屏幕旋转时进度条隐藏，此时完全释放主线程算力，彻底消除转屏卡顿！
+                if (player.duration > 0 && seekBar.visibility == View.VISIBLE) {
 
                     seekBar.max =
                         player.duration.toInt()
