@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F6FA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Device Care"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="#111111"
+            android:paddingBottom="24dp" />
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="System Optimization Suite"
+           android:textSize="15sp"
+           android:textColor="#777777"
+           android:paddingTop="4dp"
+           android:paddingBottom="22dp" />
+        
+        <!-- Battery Health -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:elevation="3dp"
+            android:padding="20dp"
+            android:layout_marginBottom="18dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Battery Health"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#111111" />
+
+            <TextView
+                android:id="@+id/batteryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Excellent"
+                android:textSize="17sp"
+                android:textColor="#666666"
+                android:paddingTop="10dp" />
+
+            <TextView
+                android:id="@+id/tempText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Temperature: 33°C"
+                android:textSize="17sp"
+                android:textColor="#666666"
+                android:paddingTop="6dp" />
+
+        </LinearLayout>
+
+        <!-- RAM Usage -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:elevation="3dp"
+            android:padding="20dp"
+            android:layout_marginBottom="18dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RAM Usage"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#111111" />
+
+            <ProgressBar
+                android:id="@+id/ramBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="14dp" />
+
+            <TextView
+                android:id="@+id/ramText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5.2GB / 8GB Used"
+                android:textSize="16sp"
+                android:textColor="#666666"
+                android:paddingTop="10dp" />
+
+        </LinearLayout>
+
+        <!-- Storage Cleaner -->
+
+        <LinearLayout
+            android:id="@+id/storageLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:elevation="3dp"
+            android:padding="20dp"
+            android:layout_marginBottom="18dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Storage Cleaner"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#111111" />
+
+            <TextView
+                android:id="@+id/cacheText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Junk Cache: 1.7GB"
+                android:textSize="17sp"
+                android:textColor="#666666"
+                android:paddingTop="10dp" />
+
+            <Button
+                android:id="@+id/cleanButton"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="Clean Now"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:backgroundTint="#2D7FF9"
+                android:layout_marginTop="18dp" />
+
+        </LinearLayout>
+
+        <!-- System Status -->
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:elevation="3dp"
+    android:padding="20dp"
+    android:layout_marginBottom="18dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="System Status"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#111111" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Version 14.2.1"
+        android:textSize="16sp"
+        android:textColor="#666666"
+        android:paddingTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Security Module: Active"
+        android:textSize="16sp"
+        android:textColor="#34A853"
+        android:paddingTop="6dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thermal Status: Stable"
+        android:textSize="16sp"
+        android:textColor="#FB8C00"
+        android:paddingTop="6dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Optimization Engine: Ready"
+        android:textSize="16sp"
+        android:textColor="#2D7FF9"
+        android:paddingTop="6dp" />
+
+</LinearLayout>
+        
+        <!-- Quick Tools -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <Button
+                android:id="@+id/batterySaverButton"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:text="Battery Saver"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:backgroundTint="#34A853"
+                android:layout_marginEnd="6dp" />
+
+            <Button
+                android:id="@+id/cpuBoostButton"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:text="CPU Boost"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:backgroundTint="#FB8C00"
+                android:layout_marginStart="6dp" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/optimizeButton"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:text="Smart Optimize"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:backgroundTint="#2D7FF9" />
+
+    </LinearLayout>
+
+</ScrollView>
