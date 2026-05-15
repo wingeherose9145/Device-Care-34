@@ -13,14 +13,14 @@ class StorageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_storage)
 
-        // 绑定 XML 中的 ID
+        // 绑定 XML 布局中的控件 ID
         val imageText = findViewById<TextView>(R.id.imageText)
         val videoText = findViewById<TextView>(R.id.videoText)
         val apkText = findViewById<TextView>(R.id.apkText)
         val cacheText = findViewById<TextView>(R.id.cacheText)
         val scanButton = findViewById<Button>(R.id.scanButton)
 
-        // 生成伪装随机数据
+        // 生成随机的伪装数据，增强真实感
         imageText.text = "${Random.nextInt(2, 8)}.${Random.nextInt(1, 9)} GB"
         videoText.text = "${Random.nextInt(8, 30)}.${Random.nextInt(1, 9)} GB"
         apkText.text = "${Random.nextInt(1, 4)}.${Random.nextInt(1, 9)} GB"
