@@ -12,7 +12,6 @@ import android.widget.LinearLayout
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.media3.common.MediaItem
-import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
 import java.io.File
@@ -32,7 +31,6 @@ class PlayerActivity : AppCompatActivity() {
     private val secretKey: Byte = 0x5A
     private val handler = Handler(Looper.getMainLooper())
 
-    // 自动隐藏控制条的任务
     private val hideRunnable = Runnable {
         if (!player.isPlaying) return@Runnable
         topControls.visibility = View.GONE
@@ -42,39 +40,37 @@ class PlayerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        // 全屏和安全设置（防截屏）
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
         
         setContentView(R.layout.activity_player)
 
+        // 绑定 XML ID
         playerView = findViewById(R.id.playerView)
         seekBar = findViewById(R.id.seekBar)
         topControls = findViewById(R.id.topControls)
         
-        val prevButton = findViewById<ImageButton>(R.id.prevButton)
-        val nextButton = findViewById<ImageButton>(R.id.nextButton)
-        val rotateButton = findViewById<ImageButton>(R.id.rotateButton)
+        val prevBtn = findViewById<ImageButton>(R.id.prevButton)
+        val nextBtn = findViewById<ImageButton>(R.id.nextButton)
+        val rotateBtn = findViewById<ImageButton>(R.id.rotateButton)
 
         videoList = intent.getStringArrayListExtra("video_list") ?: arrayListOf()
         currentIndex = intent.getIntExtra("current_index", 0)
 
-        // 初始化 Media3 播放器
         player = ExoPlayer.Builder(this).build()
         playerView.player = player
         playerView.useController = false 
 
         playVideo(currentIndex)
 
-        prevButton.setOnClickListener { if (currentIndex > 0) playVideo(--currentIndex) }
-        nextButton.setOnClickListener { if (currentIndex < videoList.size - 1) playVideo(++currentIndex) }
-        
-        rotateButton.setOnClickListener {
+        // 设置点击事件
+        prevBtn?.setOnClickListener { if (currentIndex > 0) playVideo(--currentIndex) }
+        nextBtn?.setOnClickListener { if (currentIndex < videoList.size - 1) playVideo(++currentIndex) }
+        rotateBtn?.setOnClickListener {
             requestedOrientation = if (requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
                 ActivityInfo.SCREEN_ORIENTATION_PORTRAIT else ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         }
 
-        // 点击屏幕切换控制条显示状态
         playerView.setOnClickListener {
             if (topControls.visibility == View.VISIBLE) {
                 topControls.visibility = View.GONE
@@ -92,13 +88,11 @@ class PlayerActivity : AppCompatActivity() {
 
     private fun playVideo(index: Int) {
         if (index < 0 || index >= videoList.size) return
-        
-        deleteTempFile() // 清除之前的临时文件
+        deleteTempFile()
         val sourceFile = File(videoList[index])
         tempFile = File(cacheDir, "temp_v_${System.currentTimeMillis()}.mp4")
         
         try {
-            // 解密流处理
             val fis = FileInputStream(sourceFile)
             val fos = FileOutputStream(tempFile)
             val buffer = ByteArray(1024)
