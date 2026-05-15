@@ -13,12 +13,12 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        // 简单的淡入动画
+        // 设置淡入动画效果
         val root = findViewById<View>(android.R.id.content)
         root.alpha = 0f
         root.animate().alpha(1f).setDuration(700).start()
 
-        // 1.5秒后跳转到伪装主页
+        // 1.5秒后跳转到伪装主页 (FakeHomeActivity)
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this, FakeHomeActivity::class.java))
             finish()
